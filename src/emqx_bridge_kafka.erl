@@ -168,8 +168,8 @@ on_message_publish(Message, _Env) ->
     ]),
     %% ekaf:produce_async(ProduceTopic, Json),
     %% ekaf:produce_async(Topic, Payload),
-    {ok, MatchPattern} = re:compile("[/]").
-    NewTopic = re:replace(Topic,MatchPattern,"-",[global,{return,list}]).
+    {ok, MatchPattern} = re:compile("[/]"),
+    NewTopic = re:replace(Topic,MatchPattern,"-",[global,{return,list}]),
     ekaf:produce_async(NewTopic, Json),
     {ok, Message}.
 
