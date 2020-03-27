@@ -166,11 +166,9 @@ on_message_publish(Message, _Env) ->
             {cluster_node,node()}
             %% ,{ts,emqx_time:now_to_secs(Timestamp)}
     ]),
-    %% ekaf:produce_async(ProduceTopic, Json),
+    ekaf:produce_async(ProduceTopic, Json),
     %% ekaf:produce_async(Topic, Payload),
-    {ok, MatchPattern} = re:compile("[/]"),
-    NewTopic = re:replace(Topic,MatchPattern,"-",[global,{return,list}]),
-    ekaf:produce_async(NewTopic, Json),
+    %% ekaf:produce_async("MQTT-Kafka", Json),
     {ok, Message}.
 
 
